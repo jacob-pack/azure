@@ -22,3 +22,10 @@ resource subscriptionDefinition_resource 'Microsoft.Subscription/subscriptionDef
     subscriptionDisplayName: subscriptionName
   }
 }
+
+//sub operations returns a list of operations that can be performed against the subscription
+//the results include: display (obj that represents the operation), isDataAction, and name
+//I have no use for it at this moment but suspect it would be useful later.
+//resource subscriptionOperations_resource 'Microsoft.Subscription/subscriptionOperations@2017-11-01-preview' existing = {
+//  name: subscriptionOperationsName
+//}
