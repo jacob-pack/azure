@@ -1,8 +1,15 @@
 var envString = 'dev'
 var systemName = 'JSP'
+var orgName = 'orgName'
 
-var storageAccountName = 'st${systemName}${envString}-001'
+var storageAccountName = 'st${systemName}${envString}001'
 
+
+
+module JSP_Subscription './Resources/Subscription.bicep' = {
+  name: 'JSP_Subscription'
+  params:{}
+}
 
 
 module JSP_StorageAccount './Resources/StorageAccount.bicep'={
