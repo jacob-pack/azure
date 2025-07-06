@@ -8,6 +8,7 @@ var storageAccountName = 'st${systemName}${envString}001'
 
 module JSP_Subscription './Resources/Subscription.bicep' = {
   name: 'JSP_Subscription'
+  scope: tenant()
   params:{}
 }
 
