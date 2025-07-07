@@ -4,7 +4,7 @@ on:
     workflow_dispatch:
     push:
         paths:
-        - './bicep/infrastructure/resources/**.bicep'
+        - 'bicep/infrastructure/resources/**.bicep'
 jobs:
     publish:
         runs-on: ubuntu-latest
