@@ -1,0 +1,21 @@
+name: publish bicep modules to github container registry
+
+on:
+    workflow_dispatch:
+    push:
+        paths:
+        - 'Azure/Bicep/Infrastructure/Resources/**.bicep'
+jobs:
+    publish:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: checkout repo
+              uses: actions/checkout@v3
+
+            - name: access GHCR
+              run: echo "${{ secrets.GITHUB_TOKEN}}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+            - name: publish storage template
+              run: |
+                bicep publish ./infrastructure/resources/StorageAccount.bicep --target br:ghcr.io/${{ github.repository }}/storageaccount:v0.0.1 --with-source
