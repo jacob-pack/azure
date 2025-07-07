@@ -18,4 +18,5 @@ jobs:
 
             - name: publish storage template
               run: |
-                bicep publish ./bicep/infrastructure/resources/storageAccount.bicep --target br:ghcr.io/${{ github.repository }}/storageaccount:v0.0.1 --with-source
+                bicep publish ./bicep/infrastructure/resources/storageAccount.bicep \
+                 --target br:ghcr.io/${{ github.repository }}/storageaccount:v0.0.1 --with-source 
