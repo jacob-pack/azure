@@ -27,16 +27,3 @@ module JSP_StorageAccount './Resources/storageAccount.bicep'={
 
 
 }
-
-
-module JSP_AppService './Resources/appService.bicep' ={
-    name: 'JSP_AppService'
-    params:{ 
-    
-    
-  
-
-
-
-  }
-}

@@ -7,7 +7,6 @@ param subscriptionDefinition_OfferType string
 var subscriptionName = 'sub-${orgName}-${systemName}-${envString}-001'
 var subscriptionDefName = 'subdef-${orgName}-${systemName}-${envString}-001'
 
-
 targetScope = 'tenant'
 
 resource subscriptionAlias_resource 'Microsoft.Subscription/aliases@2024-08-01-preview' = {
