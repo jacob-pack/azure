@@ -1,15 +1,15 @@
 var envString = 'dev'
-var systemName = 'JSP'
+var systemName = 'jsp'
 var orgName = 'orgName'
 var subscriptionWorkloadType = 'DevTest'
 var subscriptionDefinition_OfferType = 'MS-AZR-0148P'
-
+var deploySubscription bool = false
 var storageAccountName = 'st${systemName}${envString}001'
 
 
 
-module JSP_Subscription './resources/subscription.bicep' = {
-  name: 'JSP_Subscription'
+module jsp_Subscription './resources/subscription.bicep' = if (deploySubscription) {
+  name: 'jsp_Subscription'
   scope: tenant()
   params:{
     envString: envString
@@ -21,7 +21,7 @@ module JSP_Subscription './resources/subscription.bicep' = {
 }
 
 
-module JSP_StorageAccount './resources/storageAccount.bicep'={
+module jsp_StorageAccount './resources/storageAccount.bicep'={
   name: storageAccountName
   params:{}
 
