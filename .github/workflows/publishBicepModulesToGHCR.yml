@@ -16,7 +16,9 @@ jobs:
             - name: access GHCR
               run: echo "${{ secrets.GITHUB_TOKEN}}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-            - name: publish storage template
-              run: |
-                bicep publish ./bicep/infrastructure/resources/storageAccount.bicep \
-                 --target br:ghcr.io/${{ github.repository }}/storageaccount:v0.0.1 --with-source 
+         ##   - name: publish storage template
+         ##     run: |
+         ##       bicep publish ./bicep/infrastructure/resources/storageAccount.bicep \
+         ##        --target br:ghcr.io/${{ github.repository }}/storageaccount:v0.0.1 --with-source 
+         ## bicep publish is only able to authenticate against ACR targets. It won't be able to publish against
+         ##GHCR natively.
