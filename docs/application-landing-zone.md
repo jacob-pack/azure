@@ -1,4 +1,4 @@
-# Azure Application Landing Zone Plan
+# Application Landing Zone Plan
 
 To clarify, as the term "landing zone" is a bit obfuscative; 
 a landing zone represents what Microsoft calls an "opinionated target architecture".
