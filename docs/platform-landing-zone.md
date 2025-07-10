@@ -3,14 +3,14 @@
 
 ---
 
-## I. Objective
+## 1 - Objective
 A centralized and secure Azure environment to host org policies, networking, identity, logging, and monitoring enabling scalable, compliant resource usage across teams. 
 
 While security and system integrity is at the root of our efforts; we also need to ensure that we allow for  flexibility so as to avoid unduly impeding systems and their teams.
 
 ---
 
-## II. Identity and Access
+## 2 - Identity and Access
 
 - **Centralized Azure AD tenant**  
   All users, groups, and app registrations should exist in a central identity store.
@@ -24,7 +24,7 @@ While security and system integrity is at the root of our efforts; we also need 
 
 ---
 
-## III. Management Group Hierarchy
+## 3 -  Management Group Hierarchy
 
 - Design an organizational structure:
   - Root Group – high-level policy enforcement.
@@ -33,7 +33,7 @@ While security and system integrity is at the root of our efforts; we also need 
 
 ---
 
-## IV. Subscription Layout
+## 4 - Subscription Layout
 
 - Use **dedicated subscriptions** for:
   - Shared services (DNS, monitoring, firewalls).
@@ -44,7 +44,7 @@ While security and system integrity is at the root of our efforts; we also need 
 
 ---
 
-## V. Networking Topology
+## 5 - Networking Topology
 
 - Implement **hub-and-spoke network design**:
   - **Hub**: firewalls, ExpressRoute/VPN gateways, DNS.
@@ -55,7 +55,7 @@ While security and system integrity is at the root of our efforts; we also need 
 
 ---
 
-## VI. Policy and Security Controls
+## 6 - Policy and Security Controls
 
 - Use **Azure Policy** and **Initiatives** to:
   - Enforce tags (e.g., `Environment`, `CostCenter`).
@@ -67,7 +67,7 @@ While security and system integrity is at the root of our efforts; we also need 
 
 ---
 
-## VII. Monitoring & Operations
+## 7 -  Monitoring & Operations
 
 - Centralize logs to a shared **Log Analytics Workspace** (note: while this is ideal, there are complexities with some services logging to multiple places such as a system log workspace and a centralized log workspace.)
 - Enable:
@@ -80,7 +80,7 @@ While security and system integrity is at the root of our efforts; we also need 
 
 ---
 
-## VIII. Automation & Blueprinting
+## 8 - Automation & Blueprinting
 
 - Provide **IaC modules** for:
   - Subscription provisioning
@@ -92,7 +92,7 @@ While security and system integrity is at the root of our efforts; we also need 
 
 ---
 
-## IX. Cost and Budgeting
+## 9 - Cost and Budgeting
 
 - Set **budgets and cost alerts** per subscription.
 - Require cost tagging (`Owner`, `Project`, `Environment`) for all deployed resources.

@@ -36,7 +36,7 @@ With that out of the way we can go further into what these look like for us:
 
 
 
-## I. Naming scheme
+## 1 - Naming scheme
 While this will flex between resources and naming restrictions, we want naming to be as clear, condensed, and as representive as possible.
 The following structure I believe achieves a suitable, modular, foundation for naming that can be flexed or adjusted minorly as needed.
 I do believe there are improvements that could be made but I hesitate to dwell too long allowing "perfect to get in the way of good".
@@ -46,7 +46,7 @@ I do believe there are improvements that could be made but I hesitate to dwell t
 ex.: An azure sql database served out of the East US region would look like "{sqldb-JSP-tracking-eus}".
 ---
 
-## II. Subscription and Resource Group Design
+## 2 - Subscription and Resource Group Design
 
 - Microsoft generally recommends use of *one subscription per application* or tightly coupled workload.
 - I find "one subscription per application" to be a little too restrictive, as you can target subscriptions for things such as dev/tst pricing. In the instance I have the "one subscription per application", and I have DEV/TST/UAT/PRD in that subscribtion, I lose out on the ability to tailor system needs per env at the subscription level. This falls in line moreso with a "tightly coupled workload" philosphy. But, this also requires a higher level of application and infrastructure maturity for the system being considered.
@@ -55,7 +55,7 @@ ex.: An azure sql database served out of the East US region would look like "{sq
   - Storage (ex. "rg-JSP-storage-001")
   - Databases (ex. "rg-JSP-db-001")## 
   
-  III. Identity and Access Control
+ ## 3 - Identity and Access Control
 - **Use Managed Identities**  
   Avoid hardcoded credentials. You can use system identities to easily facilitate communication needs between resources by assigning roles to the identities.
 
@@ -66,7 +66,7 @@ ex.: An azure sql database served out of the East US region would look like "{sq
 
 ---
 
-## IV. Network and Connectivity
+## 4 - Network and Connectivity
 
 - Integrate with hub network via VNet peering.
 - Use:
@@ -76,7 +76,7 @@ ex.: An azure sql database served out of the East US region would look like "{sq
 
 ---
 
-## V. CI/CD and Automation
+## 5 - CI/CD and Automation
 
 - Standardize pipelines using:
   - Azure DevOps
@@ -93,7 +93,7 @@ ex.: An azure sql database served out of the East US region would look like "{sq
 
 ---
 
-## VI. Monitoring and Alerting
+## 6 - Monitoring and Alerting
 
 - Enable:
   - Application Insights for telemetry
@@ -104,7 +104,7 @@ ex.: An azure sql database served out of the East US region would look like "{sq
 
 ---
 
-## VII. Policy Compliance
+## 7 - Policy Compliance
 
 - Inherit platform-level governance:
   - Tag enforcement
@@ -115,7 +115,7 @@ ex.: An azure sql database served out of the East US region would look like "{sq
 
 ---
 
-## VIII. Environment Lifecycle
+## 8 - Environment Lifecycle
 
 - Isolate environments:
   - Separate subscriptions preferred
@@ -127,7 +127,7 @@ ex.: An azure sql database served out of the East US region would look like "{sq
 
 ---
 
-## IX. Cost Awareness
+## 9 - Cost Awareness
 
 - Tag resources with `CostCenter`, `Owner`, `Project` or similar.
 - Review budgets and usage regularly.
@@ -135,7 +135,7 @@ ex.: An azure sql database served out of the East US region would look like "{sq
 
 ---
 
-## X. Documentation and Support
+## 10 - Documentation and Support
 
 Each application environment should include:
 
