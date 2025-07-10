@@ -6,7 +6,7 @@
 ## 1 - Objective
 A centralized and secure Azure environment to host org policies, networking, identity, logging, and monitoring enabling scalable, compliant resource usage across teams. 
 
-While security and system integrity is at the root of our efforts; we also need to ensure that we allow for  flexibility so as to avoid unduly impeding systems and their teams.
+While security and system integrity is at the root of our efforts; we also need to ensure that we allow for flexibility so as to avoid unduly impeding systems and their teams.
 
 ---
 
