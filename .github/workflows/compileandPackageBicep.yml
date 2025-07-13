@@ -1,0 +1,32 @@
+# .github/workflows/build.yml
+name: Build and Package Bicep
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Lint Bicep
+        run: bicep lint ./main.bicep
+
+      - name: Build Bicep to ARM
+        run: bicep build ./main.bicep --outfile ./main.json
+
+      - name: Package templates
+        run: |
+          mkdir artifact
+          cp main.bicep main.json artifact/
+          echo "Version=${{ github.sha }}" > artifact/metadata.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: bicep-artifact
+          path: artifact/
+          ##the artifacts in this workflow represent the templates
+          ##that will be consumed and pushed in the deployment pipeline
