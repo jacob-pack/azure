@@ -1,1 +1,0 @@
-az deployment tenant create --template-file ./bicep/infrastructure/resources/subscription.bicep --location eastus2 --what-if --verbose
