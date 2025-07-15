@@ -1,11 +1,7 @@
-param envString string
-param systemName string
-param orgName string
 param workloadType string
 param subscriptionDefinition_OfferType string
-
-var subscriptionName = 'sub-${orgName}-${systemName}-${envString}-001'
-var subscriptionDefName = 'subdef-${orgName}-${systemName}-${envString}-001'
+param subscriptionName string
+param subscriptionDefName string
 
 targetScope = 'tenant'
 
