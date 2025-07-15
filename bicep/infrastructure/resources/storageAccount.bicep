@@ -1,14 +1,13 @@
-param storageSku string = 'Standard_LRS'
-
-
-
-
+param storageAccountSku string
+param storageAccountKind string
+param storageAccountLocation string
+param storageAccountName string
 
 resource jspStorageAccount 'Microsoft.Storage/storageAccounts@2025-01-01' = {
 
-  kind: 'StorageV2'
-  location: 'eastus2'
-  name: 'stjspdev001'
-  sku: {name: storageSku} //sku expects a sku object
+  kind: storageAccountKind
+  location: storageAccountLocation
+  name: storageAccountName
+  sku: {name: storageAccountSku} //sku expects a sku object
 
 }

@@ -1,21 +1,25 @@
-param virtualNetworks_vnet_jsp_eastus2_001_name string = 'vnet-jsp-eastus2-001'
+param vnetName string
+param vnetLocation string
+param vnetAddressPrefixes string
+param vnetEncryptionEnabled bool
+param vnetEncryptionEnforcement string
+param vnetPrivateVnetPolicies string
+param vnetEnabledDdosProtection bool
 
-resource virtualNetworks_vnet_jsp_eastus2_001_name_resource 'Microsoft.Network/virtualNetworks@2024-05-01' = {
-  name: virtualNetworks_vnet_jsp_eastus2_001_name
-  location: 'eastus2'
+resource vnetResource 'Microsoft.Network/virtualNetworks@2024-05-01' = {
+  name: vnetName
+  location: vnetLocation
   properties: {
     addressSpace: {
-      addressPrefixes: [
-        '10.0.0.0/16'
-      ]
+      addressPrefixes: [vnetAddressPrefixes]
     }
     encryption: {
-      enabled: true
-      enforcement: 'AllowUnencrypted'
+      enabled: vnetEncryptionEnabled
+      enforcement: vnetEncryptionEnforcement
     }
-    privateEndpointVNetPolicies: 'Disabled'
+    privateEndpointVNetPolicies: vnetPrivateVnetPolicies
     subnets: []
     virtualNetworkPeerings: []
-    enableDdosProtection: false
+    enableDdosProtection: vnetEnabledDdosProtection
   }
 }
