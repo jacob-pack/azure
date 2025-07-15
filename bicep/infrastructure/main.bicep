@@ -50,6 +50,7 @@ module jsp_Vnet './resources/vnet.bicep' = {
   params: {
     vnetName:vnetName
     vnetLocation:primaryRegion
+    vnetAddressPrefixes:vnetAddressPrefixes
     vnetEncryptionEnabled:vnetEncryptionEnabled
     vnetEncryptionEnforcement:vnetEncryptionEnforcement
     vnetPrivateVnetPolicies:vnetPrivateVnetPolicies
