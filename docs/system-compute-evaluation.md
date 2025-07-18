@@ -26,3 +26,7 @@ We can rely on standardized NIST documentation for these structures and terms. W
 These particular publications are just a few examples of several. Many individuals worry concepts like these only serve to encumber the cloud migration and evaluation process. In my experience, reviewing and defining these concepts for evaluated systems accelerate cloud adoption and migration. By giving precise, specific, language to abstract concepts we enable communication of those concepts.
 
 By breaking down this language barrier around complex technical and organizational blockers; we can enable our teams to execute efficiently, effectively, and securely on their migration plans.
+
+With that in mind; we can evaluate systems and their environments with these strategies in mind:
+
+
