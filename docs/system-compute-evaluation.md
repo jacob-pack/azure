@@ -27,6 +27,32 @@ These particular publications are just a few examples of several. Many individua
 
 By breaking down this language barrier around complex technical and organizational blockers; we can enable our teams to execute efficiently, effectively, and securely on their migration plans.
 
-With that in mind; we can evaluate systems and their environments with these strategies in mind:
+With that in mind; we can evaluate systems and their environments for the most appropriate target infrastructure.
+
+
+# Step 1: Evaluating Appropriate Compute Resources based on System Characteristcs
+
+Below are some of the most common azure compute resources and the general criteria for a system to qualify for use of that structure. 
+
+
+## Virtual Machines (VMs)
+
+- Best for legacy workloads requiring:
+  - Custom low level control (drivers/kernel tuning)
+  - Manual configuration
+
+- Appropriate when:
+  - Application is tighlty coupled to the host OS
+  - No significant scaling requirements
+  - System lacks automation support/skills
+
+- Limitations:
+  - Higher ops overhead (patching, availability, monitoring)
+  - Poor scalability and more expensive
+
+
+
+
+Qualification considers system compatibility and migration feasibility at the time of evaluation. If more cost effective compute services are desired for a given system; then the appropriate changes must be made to qualify that system for the desired configuration.
 
 
