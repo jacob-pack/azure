@@ -37,7 +37,8 @@ Below are some of the most common azure compute resources and the general criter
 
 ## Virtual Machines (VMs)
 
-- Best for legacy workloads requiring:
+- Best for:
+  - legacy workloads requiring:
   - Custom low level control (drivers/kernel tuning)
   - Manual configuration
 
@@ -51,8 +52,69 @@ Below are some of the most common azure compute resources and the general criter
   - Poor scalability and more expensive
 
 
+## Virtual Machine Scale Sets (VMSS)
+
+- Best for:
+ - stateless applications needing horizontal scaling capabilities
+
+- Appropriate when:
+  - Workload/application needs require dynamic scaling
+  - Application is decoupled from individual instances
+  - System needs zone redundancy or auto-healing
+
+- Considerations:
+  - Requires workload/application readiness (e.g., statelessness, health checks)
+  - Moderate ops complexity (autoscale config, image management)
+
+---
+
+## App Services (PaaS)
+
+- Best for:
+  - Web APIs
+  - Web apps
+  - Backend services using .Net, Node.JS, Java, Python, PHP, Go, or other supported runtimes.
+
+- Appropriate when:
+  - Application is stateless
+  - Ops team prefers managed hosting (no OS level access needed)
+  - CI/CD pipelines are established or actively being established
+
+- Limitations:
+  - Limited control of the host/runtime
+  - No support for complex networking (sidecars/sidecar injection/custom mesh)
+
+---
+
+## Azure Container Apps (ACA)
 
 
-Qualification considers system compatibility and migration feasibility at the time of evaluation. If more cost effective compute services are desired for a given system; then the appropriate changes must be made to qualify that system for the desired configuration.
+---
+
+## Azure Kubernetes Service (AKS)
+
+
+
+Microsoft covers these considerations in much more detail in their [Migration Strategy Assessment](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/plan/select-cloud-migration-strategy)
+---
+# System Evaluation Insight
+
+Qualification considers system compatibility and migration feasibility at the time of evaluation. If more cost effective compute services are desired for a given system then (then the ones it qualified for at evaluation); then the appropriate changes must be made to qualify that system for the desired configuration.
+
+One might notice, and be generally surprised, that the infrastructure is frequently not the most significant factor in these evaluations. Rather, many of the more efficient solutions depend on the hosted workload/application being stateless vs stateful.
+
+This is important as many workloads/applications depend on historical configurations/operations to operate. Examples being applications that mantain user preferences locally, shopping applications mantaining information like items in a cart, or anything that mantains a current or ongoing client session. Stateless applications treat each operation as completely new and unrelated to previous operations. Applications like HTTP hosted API's are the most common example of this.
+
+Stateful applications are frequently converted to stateless applications by rearchitecting the application into microservices or by rehosting the required stateful information to a seperate durable storage medium (such as an Azure Storage Account or a database). This generally looks like several, smaller apps, each serving specific functionality, that use the centralized storage/databases for referencing needed information.
+
+While easy to say; refactoring applications frequently includes significant investment in development time and effort. If an organization is actively migrating to a cloud platform, and the organization decides they would like to refactor the application to better suit stateless compute offerings, they must either prioritize the migration or prioritize the refactor.
+
+Microsoft has extensive documentation on many of these strategies and approaches in their [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/modernize/modernize-strategies/)
+
+---
+
+# System Compute Maturity/Modernization Flow
+
+
 
 
