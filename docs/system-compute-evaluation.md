@@ -17,7 +17,7 @@ We can rely on standardized NIST documentation for these structures and terms. W
 
 ### NIST SP 800-53 Rev. 5 (Security and Privacy Controls for Information Systems and Organizations)
     - Defines the structure the can be used for evaluating and enforcing system and security controls in detail.
-    - 
+    - Defines privacy controls, audit and accountability mechanisms, incident response, and more.
 
 ### NIST SP 800-37 Rev. 2 (Risk Management Framework for Information Systems and Organizations: A System Life Cycle Approach for Security and Privacy)
     - Defines additional logical and security control structures to enable risk and security management
@@ -25,4 +25,4 @@ We can rely on standardized NIST documentation for these structures and terms. W
 
 These particular publications are just a few examples of several. Many individuals worry concepts like these only serve to encumber the cloud migration and evaluation process. In my experience, reviewing and defining these concepts for evaluated systems accelerate cloud adoption and migration. By giving precise, specific, language to abstract concepts we enable communication of those concepts.
 
-By breaking down the language barrier around complex technical and organizational blockers; we can enable our teams to execute efficient, effectively, and securely on their migration plans.
+By breaking down this language barrier around complex technical and organizational blockers; we can enable our teams to execute efficient, effectively, and securely on their migration plans.
