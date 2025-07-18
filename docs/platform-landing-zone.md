@@ -11,7 +11,7 @@ A centralized and secure Azure environment to host org policies, networking, ide
   All users, groups, and app registrations should exist in a central identity store.
 
 - RBAC  
-  Define roles like `Platform Admin`, `Security Reader`, and `Network Contributor`.  
+  Define roles like Platform Admin, Security Reader, and Network Contributor.  
   Use Azure AD groups for assignment — not individual accounts. (note: as of Q1 2025, Azure now offers the Resource Graph/Graph resource provider. Up until then, you could not as easily automate group/user creation via templates)
 
 - Privileged Identity Management
@@ -53,7 +53,7 @@ A centralized and secure Azure environment to host org policies, networking, ide
 ## 6 - Policy and Security Controls
 
 - Use Azure Policy and Initiatives to:
-  - Enforce tags (e.g., `Environment`, `CostCenter`).
+  - Enforce tags (Environment, CostCenter, etc...).
   - Restrict region/SKU use.
   - Require encryption and diagnostic settings.
 
@@ -88,4 +88,4 @@ A centralized and secure Azure environment to host org policies, networking, ide
 ## 9 - Cost and Budgeting
 
 - Set budgets and cost alerts per subscription.
-- Require cost tagging (`Owner`, `Project`, `Environment`) for all deployed resources.
+- Require cost tagging (Owner, Project, Environment) for all deployed resources.
