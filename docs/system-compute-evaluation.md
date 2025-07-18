@@ -87,12 +87,36 @@ Below are some of the most common azure compute resources and the general criter
 ---
 
 ## Azure Container Apps (ACA)
+- Best for:
+  - Systems requiring container level control without managing kubernetes
+
+- Appropriate when:
+  - Application is stateless and containerized
+  - System requires granular control over resource scaling and minimal ops overhead.
+
+- Limitations:
+  - Limited control of the host/runtime
+  - No support for complex networking (sidecars/sidecar injection/custom mesh)
 
 
 ---
 
 ## Azure Kubernetes Service (AKS)
 
+- Best for:
+  - Advanced orchestration 
+  - custom runtimes 
+  - multi-container workloads/applications.
+
+- Appropriate when:
+  - Application is stateless
+  - Team has baseline Kubernetes skills.
+  - IaC and observability components are in place.
+
+- Limitations:
+  - High complexity and management overhead (node pools, observability stack, network policy, etc.).
+
+---
 
 
 Microsoft covers these considerations in much more detail in their [Migration Strategy Assessment](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/plan/select-cloud-migration-strategy)
