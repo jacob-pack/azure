@@ -1,7 +1,19 @@
 # Platform Landing Zone Plan  
 
-## 1 - Purpose
+## 1 - Purpose and Overview
 A centralized and secure Azure environment to host org policies, networking, identity, logging, and monitoring enabling scalable, compliant resource usage across teams. While security and system integrity is at the root of our efforts; we also need to ensure that we allow for flexibility so as to avoid unduly impeding systems and their teams.
+
+
+A general, overview, flow of how resources should be defined on tenant creation is as follows:
+  - 1) Management Group Resources
+  - 2) Policy Definitions
+  - 3) Role Based Access Control Definitions
+  - 4) Logging and Security Configurations
+  - 5) Management Group Diagnostic Settings
+  - 6) Hub Networking
+  - 7) Role Based Access Control Assignments
+  - 8) Subscription Configuratinos
+  - 9) Policy Assignments
 
 ---
 
