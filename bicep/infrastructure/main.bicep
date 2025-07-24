@@ -7,6 +7,9 @@ var primaryRegion = 'eastus2'
 //normally, I construct the resource name in the resource file with the component vars above passed in.
 //I have left them here in main, in this instance, for easy access/legiblity
 
+//I would generally split up the driving files for various components (platform lzs, application lzs, network components, etc...)
+//In this instance I am leaving it all here for simplicity.
+
 //subscription vars
 var subscriptionName = 'sub-${orgName}-${systemName}-${envString}-001'
 var subscriptionDefName = 'subdef-${orgName}-${systemName}-${envString}-001'
@@ -53,6 +56,29 @@ var expressRouteCircuitEnableDirectPortRateLimit = false
 //In a production environment, I would generally separate Tenant/Subscription/ResourceGroup deployment workflows.
 //For simplicities sake I target the scope at the module level here.
 
+
+//------------------Platform Landing Zone---------------------------
+
+module jsp_ExpressRouteCircuits './resources/expressRouteCircuits.bicep' = {
+  name: expressRouteCircuitName
+  scope: resourceGroup(networkResourceGroup)
+  params: {
+    expressRouteCircuitName: expressRouteCircuitName
+    expressRouteCircuitLocation: expressRouteCircuitLocation
+    expressRouteCircuitSkuName: expressRouteCircuitSkuName
+    expressRouteCircuitSkuTier: expressRouteCircuitSkuTier
+    expressRouteCircuitSkuFamily: expressRouteCircuitSkuFamily
+    expressRouteCircuitServiceProviderName: expressRouteCircuitServiceProviderName
+    expressRouteCircuitPeeringLocation: expressRouteCircuitServicePeeringLocation
+    expressRouteCircuitBandwidth: expressRouteCircuitServiceBandwidth
+    expressRouteCircuitAllowClassicOperations: expressRouteCircuitAllowClassicOperations
+    expressRouteCircuitGlobalReach: expressRouteCircuitGlobalReach
+    expressRouteCircuitEnableDirectPortRateLimit: expressRouteCircuitEnableDirectPortRateLimit
+  }
+}
+
+//------------------Application Landing Zone---------------------------
+
 module jsp_Subscription './resources/subscription.bicep' = if (deploySubscription) {
   name: 'jsp_Subscription'
   scope: tenant()
@@ -89,23 +115,7 @@ module jsp_Vnet './resources/vnet.bicep' = {
   }
 }
 
-module jsp_ExpressRouteCircuits './resources/expressRouteCircuits.bicep' = {
-  name: expressRouteCircuitName
-  scope: resourceGroup(networkResourceGroup)
-  params: {
-    expressRouteCircuitName: expressRouteCircuitName
-    expressRouteCircuitLocation: expressRouteCircuitLocation
-    expressRouteCircuitSkuName: expressRouteCircuitSkuName
-    expressRouteCircuitSkuTier: expressRouteCircuitSkuTier
-    expressRouteCircuitSkuFamily: expressRouteCircuitSkuFamily
-    expressRouteCircuitServiceProviderName: expressRouteCircuitServiceProviderName
-    expressRouteCircuitPeeringLocation: expressRouteCircuitServicePeeringLocation
-    expressRouteCircuitBandwidth: expressRouteCircuitServiceBandwidth
-    expressRouteCircuitAllowClassicOperations: expressRouteCircuitAllowClassicOperations
-    expressRouteCircuitGlobalReach: expressRouteCircuitGlobalReach
-    expressRouteCircuitEnableDirectPortRateLimit: expressRouteCircuitEnableDirectPortRateLimit
-  }
-}
+
 
 module jsp_StorageAccount './resources/storageAccount.bicep' = {
   name: storageAccountName
@@ -117,3 +127,4 @@ module jsp_StorageAccount './resources/storageAccount.bicep' = {
     storageAccountSku: storageAccountSKU
   }
 }
+

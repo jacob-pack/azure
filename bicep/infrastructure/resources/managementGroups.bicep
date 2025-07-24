@@ -1,5 +1,8 @@
-//while i do plan on breaking these up into their respect modules
+//while i do plan on breaking these up into their respective modules
 //for the sake of ease and clarity of flow I am keeping MG related resource definitions here
+
+//Additionally, while i would normally modularize the invocation of the managementGroup module
+//I believe there is benefit in the clarity of inline instantiation for these resources
 
 
 targetScope = 'tenant'
@@ -13,11 +16,10 @@ param platofrmMgAlzDefaultsEnable bool = true
 param landingZoneMgConfidentialEnable bool = false
 param landingZoneMgChildren object = {}
 param platofrmMgChildren object = {}
-param telemetryOptOut bool = false
 
 // Platform and Child Management Groups
 var varPlatformMg = {
-  name: '${topLevelManagementGroupPrefix}-platform${topLevelManagementGroupSuffix}'
+  name: '${topLevelManagementGroupPrefix}-platform-${topLevelManagementGroupSuffix}'
   displayName: 'Platform'
 }
 
@@ -36,7 +38,7 @@ var varPlatformMgChildrenAlzDefault = {
 
 // Landing Zones & Child Management Groups
 var varLandingZoneMg = {
-  name: '${topLevelManagementGroupPrefix}-landingzones${topLevelManagementGroupSuffix}'
+  name: '${topLevelManagementGroupPrefix}-landingzones-${topLevelManagementGroupSuffix}'
   displayName: 'Landing Zones'
 }
 
@@ -60,24 +62,22 @@ var varLandingZoneMgChildrenConfidential = {
   }
 }
 
-// Build final onject based on input parameters for child MGs of LZs
+// Build final object based on input parameters for child MGs of LZs
 var varLandingZoneMgChildrenUnioned = (landingZoneMgAlzDefaultsEnable && landingZoneMgConfidentialEnable && (!empty(landingZoneMgChildren))) ? union(varLandingZoneMgChildrenAlzDefault, varLandingZoneMgChildrenConfidential, landingZoneMgChildren) : (landingZoneMgAlzDefaultsEnable && landingZoneMgConfidentialEnable && (empty(landingZoneMgChildren))) ? union(varLandingZoneMgChildrenAlzDefault, varLandingZoneMgChildrenConfidential) : (landingZoneMgAlzDefaultsEnable && !landingZoneMgConfidentialEnable && (!empty(landingZoneMgChildren))) ? union(varLandingZoneMgChildrenAlzDefault, landingZoneMgChildren) : (landingZoneMgAlzDefaultsEnable && !landingZoneMgConfidentialEnable && (empty(landingZoneMgChildren))) ? varLandingZoneMgChildrenAlzDefault : (!landingZoneMgAlzDefaultsEnable && landingZoneMgConfidentialEnable && (!empty(landingZoneMgChildren))) ? union(varLandingZoneMgChildrenConfidential, landingZoneMgChildren) : (!landingZoneMgAlzDefaultsEnable && landingZoneMgConfidentialEnable && (empty(landingZoneMgChildren))) ? varLandingZoneMgChildrenConfidential : (!landingZoneMgAlzDefaultsEnable && !landingZoneMgConfidentialEnable && (!empty(landingZoneMgChildren))) ? landingZoneMgChildren : (!landingZoneMgAlzDefaultsEnable && !landingZoneMgConfidentialEnable && (empty(landingZoneMgChildren))) ? {} : {}
 var varPlatformMgChildrenUnioned = (platofrmMgAlzDefaultsEnable && (!empty(platofrmMgChildren))) ? union(varPlatformMgChildrenAlzDefault, platofrmMgChildren) : (platofrmMgAlzDefaultsEnable && (empty(platofrmMgChildren))) ? varPlatformMgChildrenAlzDefault : (!platofrmMgAlzDefaultsEnable && (!empty(platofrmMgChildren))) ? platofrmMgChildren : (!platofrmMgAlzDefaultsEnable && (empty(platofrmMgChildren))) ? {} : {}
 
 // Sandbox Management Group
 var varSandboxMg = {
-  name: '${topLevelManagementGroupPrefix}-sandbox${topLevelManagementGroupSuffix}'
+  name: '${topLevelManagementGroupPrefix}-sandbox-${topLevelManagementGroupSuffix}'
   displayName: 'Sandbox'
 }
 
 // Decomissioned Management Group
 var varDecommissionedMg = {
-  name: '${topLevelManagementGroupPrefix}-decommissioned${topLevelManagementGroupSuffix}'
+  name: '${topLevelManagementGroupPrefix}-decommissioned-${topLevelManagementGroupSuffix}'
   displayName: 'Decommissioned'
 }
 
-// Customer Usage Attribution Id
-var varCuaid = '9b7965a0-d77c-41d6-85ef-ec3dfea4845b'
 
 // Level 1
 resource resTopLevelMg 'Microsoft.Management/managementGroups@2023-04-01' = {
@@ -142,41 +142,38 @@ resource resDecommissionedMg 'Microsoft.Management/managementGroups@2023-04-01' 
 }
 
 // Level 3 - Child Management Groups under Landing Zones MG
-resource resLandingZonesChildMgs 'Microsoft.Management/managementGroups@2023-04-01' = [for mg in items(varLandingZoneMgChildrenUnioned): if (!empty(varLandingZoneMgChildrenUnioned)) {
-  name: '${topLevelManagementGroupPrefix}-landingzones-${mg.key}${topLevelManagementGroupSuffix}'
-  properties: {
-    displayName: mg.value.displayName
-    details: {
-      parent: {
-        id: resLandingZonesMg.id
+resource resLandingZonesChildMgs 'Microsoft.Management/managementGroups@2023-04-01' = [
+  for mg in items(varLandingZoneMgChildrenUnioned): if (!empty(varLandingZoneMgChildrenUnioned)) {
+    name: '${topLevelManagementGroupPrefix}-landingzones-${mg.key}${topLevelManagementGroupSuffix}'
+    properties: {
+      displayName: mg.value.displayName
+      details: {
+        parent: {
+          id: resLandingZonesMg.id
+        }
       }
     }
   }
-}]
+]
 
 //Level 3 - Child Management Groups under Platform MG
-resource resPlatformChildMgs 'Microsoft.Management/managementGroups@2023-04-01' = [for mg in items(varPlatformMgChildrenUnioned): if (!empty(varPlatformMgChildrenUnioned)) {
-  name: '${topLevelManagementGroupPrefix}-platform-${mg.key}${topLevelManagementGroupSuffix}'
-  properties: {
-    displayName: mg.value.displayName
-    details: {
-      parent: {
-        id: resPlatformMg.id
+resource resPlatformChildMgs 'Microsoft.Management/managementGroups@2023-04-01' = [
+  for mg in items(varPlatformMgChildrenUnioned): if (!empty(varPlatformMgChildrenUnioned)) {
+    name: '${topLevelManagementGroupPrefix}-platform-${mg.key}${topLevelManagementGroupSuffix}'
+    properties: {
+      displayName: mg.value.displayName
+      details: {
+        parent: {
+          id: resPlatformMg.id
+        }
       }
     }
   }
-}]
+]
 
-// Optional Deployment for Customer Usage Attribution
-module modCustomerUsageAttribution '../../CRML/customerUsageAttribution/cuaIdTenant.bicep' = if (!telemetryOptOut) {
-  #disable-next-line no-loc-expr-outside-params //Only to ensure telemetry data is stored in same location as deployment. See https://github.com/Azure/ALZ-Bicep/wiki/FAQ#why-are-some-linter-rules-disabled-via-the-disable-next-line-bicep-function for more information //Only to ensure telemetry data is stored in same location as deployment. See https://github.com/Azure/ALZ-Bicep/wiki/FAQ#why-are-some-linter-rules-disabled-via-the-disable-next-line-bicep-function for more information
-  name: 'pid-${varCuaid}-${uniqueString(deployment().location)}'
-  params: {}
-}
 
 // Output Management Group IDs
 output outTopLevelManagementGroupId string = resTopLevelMg.id
-
 output outPlatformManagementGroupId string = resPlatformMg.id
 output outPlatformChildrenManagementGroupIds array = [for mg in items(varPlatformMgChildrenUnioned): '/providers/Microsoft.Management/managementGroups/${topLevelManagementGroupPrefix}-platform-${mg.key}${topLevelManagementGroupSuffix}']
 
